@@ -1,0 +1,39 @@
+<div class="row justify-content-center align-items-center h-100">
+  <div class="col-md-8">
+    <form  #form="ngForm" autocomplete="off" (submit)="onGetCurrentUser(service.curUsername)">
+        <div class="md-form">
+          <input mdbInput placeholder="Enter username" name="curUsername" #curUsername="ngModel" [(ngModel)]="service.curUsername"
+          type="text" class="form-control"  required minlength="4">
+          <button mdbBtn type="button" color="elegant" type="submit" mdbWavesEffect>Find user</button>
+        </div>
+      </form>
+  </div>
+
+  <div class="col-md-8">
+    <div class="delem" *ngIf="(service.currentUser !== null); else elseBlock">
+        <img src="{{service.currentUser.ProfilePicUrl}}">
+        <div class="info">
+            <div>
+                <div class="m-3"><h4><strong>FullName: </strong>{{service.currentUser.FullName}}</h4></div>
+                <div class="m-3"><h4><strong>Biography: </strong>{{service.currentUser.Biography}}</h4></div>
+                <div class="m-3">
+                  <h4><strong>ExternalUrl: </strong>
+                    <a routerLink="/usersave" (click)="onInstaClick(service.currentUser.ExternalUrl)">{{service.currentUser.ExternalUrl}}</a>
+                  </h4>
+                </div>
+                <div class="m-3"><h4><strong>UserName: </strong>{{service.currentUser.UserName}}</h4></div>
+                <div class="m-3"><h4><strong>FollowersCount: </strong>{{service.currentUser.FollowersCount}}</h4></div>
+                <div class="m-3"><h4><strong>FollowingCount: </strong>{{service.currentUser.FollowingCount}}</h4></div>
+                <div class="m-3"><h4><strong>IsPrivate: </strong>{{getFromBool(service.currentUser.IsPrivate)}}</h4></div>
+                <div class="m-3"><h4><strong>IsVerified: </strong>{{getFromBool(service.currentUser.IsVerified)}}</h4></div>
+            </div>
+        </div>
+        <ng-template #elseBlock>
+          <div class="elseBlock">
+            <h4>There are no such user</h4>
+          </div>
+        </ng-template>
+    </div>
+  </div>
+
+</div>

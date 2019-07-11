@@ -1,0 +1,28 @@
+<div class="row justify-content-center align-items-center h-100">
+  <div class="col-md-8">
+    <form  #form="ngForm" autocomplete="off" (submit)="onGetPicture(service.pictureLink)">
+        <div class="md-form">
+          <input mdbInput placeholder="Enter link" name="pictureLink" #pictureLink="ngModel" [(ngModel)]="service.pictureLink"
+          type="text" class="form-control"  required minlength="4">
+          <button mdbBtn type="button" color="elegant" type="submit" mdbWavesEffect>Find picture</button>
+        </div>
+    </form>
+  </div>
+
+  <div class="col-md-8">
+    <ul id="sortable" class="list-group-flush" *ngIf="(service.fullSizePictures !== null); else elseBlock">
+        <li id="list-elem" class="list-group-item mb-1 border-0" *ngFor="let image of service.fullSizePictures; index as i;">
+          <div class="li-elem">
+            <img src="{{image}}">
+            <button (click)="downdloadImg(image, i + 1)" mdbBtn type="button" color="elegant" outline="true" mdbWavesEffect>D O W N L O A D</button>
+          </div>
+        </li>
+      </ul>
+      <ng-template #elseBlock>
+        <div class="elseBlock">
+          <h4>This user has no this picture</h4>
+        </div>
+      </ng-template>
+</div>
+</div>
+

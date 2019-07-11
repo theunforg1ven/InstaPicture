@@ -1,0 +1,25 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg">
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="/photoinsta">InstaSearch</a></mdb-navbar-brand>
+  <links>
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+              <a class="nav-link" routerLink="/photoinsta" mdbWavesEffect>InstaStory</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/picsave" mdbWavesEffect>InstaImage</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/usersave" mdbWavesEffect>InstaUser</a>
+          </li>
+      </ul>
+  </links>
+</mdb-navbar>
+
+
+<div class="container">
+    <div class="col-md-12 ">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+

@@ -1,0 +1,67 @@
+<div class="row justify-content-center align-items-center h-100">
+  <div class="col-md-8">
+      <form  #form="ngForm" autocomplete="off" (submit)="onGetCurrentStories(service.username)">
+          <div class="md-form">
+            <input mdbInput placeholder="Enter username" name="username" #username="ngModel" [(ngModel)]="service.username"
+            type="text" class="form-control"  required minlength="4">
+            <button mdbBtn type="button" color="elegant" type="submit" mdbWavesEffect>Find user</button>
+          </div>
+        </form>
+  </div>
+
+  <!-- Saved stories (archive)  -->
+  <div class="col-md-8" id="savedStoryDiv">
+    <ul id="sortable" class="list-group-flush">
+        <li id="list-elem" class="list-group-item mb-1 border-0" *ngFor="let storypack of service.savedStoriesList; let i = index">
+          <div class="li-elem">
+            <a class="card-title center" (click)="onInstaArchiveToggle(i)">{{storypack.UnifyStoryName}}</a>
+            <div *ngIf="(divIndex[i] == i)">
+              <ul class="list-group-flush" >
+                <li  class="list-group-item mb-1 border-0" *ngFor="let story of storypack.Stories" >
+                  <img src="{{story.Uri}}" width="210" height="360" *ngIf="ifInclude(story.Uri)">
+                  <video controls src="{{story.Uri}}" width="210" height="360" *ngIf="!ifInclude(story.Uri)"></video>
+                  <div class="expiring-date">
+                    <h5 class="card-title center">{{story.ExpiringAt}}</h5>
+                  </div>
+                  <div *ngFor="let mention of story.Mentions">
+                      <a routerLink="" (click)="onInstaClick(mention)">{{mention}}</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+        <div class="text-center" *ngIf="(service.savedStoriesList == null)">
+            <div class="spinner-border m-3" role="status" style="width: 3rem; height: 3rem;">
+              <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+  </div>
+
+  <!-- Current user stories  -->
+  <div class="col-md-8">
+      <ul id="sortable" class="list-group-flush" *ngIf="(service.list !== null); else elseBlock">
+          <li id="list-elem" class="list-group-item mb-1 border-0" *ngFor="let story of service.list">
+            <div class="li-elem">
+              <img src="{{story.Uri}}" width="210" height="360" *ngIf="ifInclude(story.Uri)">
+              <video controls src="{{story.Uri}}" width="210" height="360" *ngIf="!ifInclude(story.Uri)"></video> 
+              <div class="expiring-date">
+                  <h5 class="card-title center">({{story.ExpiringAt}})</h5>
+              </div>
+              <div *ngFor="let mention of story.Mentions">
+                  <a routerLink="" (click)="onInstaClick(mention)">{{mention}}</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ng-template #elseBlock>
+          <div class="elseBlock">
+            <h4>This user has no current stories</h4>
+          </div>
+        </ng-template>
+  </div>
+</div>
+
+
+    
