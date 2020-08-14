@@ -156,6 +156,8 @@ namespace InstaPicture.Services
 							}
 						}
 
+						//var test = highlight.Value.CoverMedia.Image.Uri;
+
 						savedInstaStories.Add(new SavedInstaStory
 						{
 							 UnifyStoryName = highlight.Value.Title,
