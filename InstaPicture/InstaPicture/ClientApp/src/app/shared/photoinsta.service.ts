@@ -18,7 +18,7 @@ export class PhotoinstaService {
   fullSizePictures: string[];
   currentUser: CurUser;
 
-  readonly rootUrl = 'https://localhost:44326/api';
+  readonly rootUrl = 'https://localhost:44338/api';
 
   constructor(private http: HttpClient,
               private datepipe: DatePipe) { }

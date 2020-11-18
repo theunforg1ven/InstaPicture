@@ -65,7 +65,7 @@ export class PhotoinstaComponent implements OnInit {
   }
 
   ifInclude(url: string): boolean {
-    if (url.includes('/vp/')) {
+    if (!url.includes('mp4')) {
       return true;
     }
     return false;
