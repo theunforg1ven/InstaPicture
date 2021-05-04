@@ -1,4 +1,5 @@
-﻿using InstaPicture.Interfaces;
+﻿using InstagramApiSharp.Classes.Models;
+using InstaPicture.Interfaces;
 using InstaPicture.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,6 +18,15 @@ namespace InstaPicture.Controllers
 		public MediaController(IMediaService mediaService)
 		{
 			_mediaService = mediaService;
+		}
+
+		[HttpGet]
+		[Route("UserPics")]
+		public async Task<IEnumerable<InstaMedia>> GetUserPicsAsync(string username)
+		{
+			var picResult = await _mediaService.GetUserPics(username);
+
+			return picResult;
 		}
 
 		[HttpGet]

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InstaPicture.Models;
+using InstagramApiSharp;
 
 namespace InstaPicture.Services
 {
@@ -64,6 +65,30 @@ namespace InstaPicture.Services
 				imageList.Add("There are no media id!");
 				return imageList;
 			}
+		}
+
+		public async Task<IEnumerable<InstaMedia>> GetUserPics(string username)
+		{
+			var user = await _api.UserProcessor.GetUserAsync(username);
+
+			var testList = new List<InstaMedia>();
+
+			if (user.Succeeded)
+			{
+				var userImages =  await _api.UserProcessor.GetUserMediaAsync(username, PaginationParameters.MaxPagesToLoad(5));
+
+				if (userImages.Succeeded)
+				{
+					foreach (var item in userImages.Value)
+					{
+						testList.Add(item);
+					}
+					
+				}
+			}
+
+			return testList;
+
 		}
 
 		public async Task<IEnumerable<SavedInstaStory>> GetSavedUserStoriesAsync(string username)
